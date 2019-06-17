@@ -40,9 +40,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());//for security purpose (https request) ,secure request.
 
-// app.get('/',(req,res)=>{
-//   res.send(database.users );
-// })
+app.get('/',(req,res)=>{
+  res.send("it is working" );
+})
 
 app.listen(process.env.PORT||3001,()=>{
   console.log('app is running on port ${process.env.PORT}');
