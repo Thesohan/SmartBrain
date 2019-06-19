@@ -18,22 +18,22 @@ const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 //connect mysql to server
 var db = require('knex')({
-  client: 'mysql',
+  client: 'pg',
   connection: {
-    host : 'localhost',
-    user : 'root',
+    host : '127.0.0.1',
+    user : 'postgres',
     password : ' ',
-    database : 'smartBrain',
+    database : 'smart-brain',
   }
 });
 /* run this command if you are facing authentication error
 alter user 'root'@'localhost' identified with mysql_native_password by 'password'
 */
-// console.log(db.select('*').from('users'));
+console.log(db.select('*').from('users'));
 // IF YOU WANT TO ACCESS DATA FROM THE database
-// db.select('*').from('users').then(data=>{
-//   console.log(data+"af");
-// });
+db.select('*').from('users').then(data=>{
+  console.log(data+"af");
+});
 
 const app = express();
 
