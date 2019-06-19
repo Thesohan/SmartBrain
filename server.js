@@ -17,14 +17,18 @@ const profile = require('./controllers/profile');
 const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 //connect mysql to server
-var db = require('knex')({
-  client: 'pg',
-  connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : ' ',
-    database : 'smart-brain',
-  }
+// var db = require('knex')({
+//   client: 'pg',
+//   connection: {
+//     host : '127.0.0.1',
+//     user : 'postgres',
+//     password : ' ',
+//     database : 'smart-brain',
+//   }
+// });
+const db = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
 });
 /* run this command if you are facing authentication error
 alter user 'root'@'localhost' identified with mysql_native_password by 'password'
