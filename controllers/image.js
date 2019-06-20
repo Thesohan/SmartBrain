@@ -19,25 +19,29 @@ const handleApiCall=(req,res)=>{
 const handleImage= (req,res,db) => {
 
   const {id} = req.body;
-  console.log(id);
+  // console.log(id);
   db('users')
-    .where({id:id})
+    .where('id','=',id)
     .increment('entries',1)
-    .then(()=>{
-      db.select('entries').from('users').where({id:id})
-          .then(data=>{
-            if(data.length>0){
-              res.status(200).json(data[0]);
-            }
-            else{
-              res.status(404).json("Something went wrong!");
-            }
-            // console.log(data);
-          })
-          .catch((err) => {res.status(404).json("Something went wrong!")})
-      // console.log(data);
+    .returning('entries')
+    .then(entries =>{
+      res.json(entries[0]);
     })
-    .catch((err) => {res.status(404).json("something went wrong")})
+    // .then(()=>{
+    //   db.select('entries').from('users').where({id:id})
+    //       .then(data=>{
+    //         if(data.length>0){
+    //           res.status(200).json(data[0]);
+    //         }
+    //         else{
+    //           res.status(404).json("Something went wrong!");
+    //         }
+    //         // console.log(data);
+    //       })
+      .catch((err) => {res.status(404).json("Something went wrong!")})
+      // console.log(data);
+    // })
+    // .catch((err) => {res.status(404).json("something went wrong")})
 };
 
 module.exports = {
