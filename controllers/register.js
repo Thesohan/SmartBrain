@@ -47,7 +47,7 @@ console.log(email,name,password,"dfg");
            //response will be having id
            .then(user =>{
              // console.log("userse",user);
-             res.json(user);
+             res.json(user[0],"\n\n\n",user);
            })
            .catch(err=> res.status(404).json("something went wrong"));
            // whenever you do a post request make sure to return a response
