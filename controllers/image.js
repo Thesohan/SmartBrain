@@ -2,11 +2,12 @@ const Clarifai = require('clarifai');
 // const express = requ/ire('express');
 
 const app = new Clarifai.App({
-  apiKey:'f8284dbfc85649858d7872cdd6aa82b8'
+  apiKey:process.env.API_CLARIFAI
 });
 
 const handleApiCall=(req,res)=>{
   app.models.predict(
+    
     // console.log(req.body.input);
       Clarifai.FACE_DETECT_MODEL,req.body.input)
       .then(response =>{//as long as the clarifai gives us a response do this
@@ -25,7 +26,7 @@ const handleImage= (req,res,db) => {
     .increment('entries',1)
     .returning('entries')
     .then(entries =>{
-      res.json(entries[0]);
+      res.json(entries[0].entries);
     })
     // .then(()=>{
     //   db.select('entries').from('users').where({id:id})
